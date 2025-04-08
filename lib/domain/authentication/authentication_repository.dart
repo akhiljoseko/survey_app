@@ -9,5 +9,12 @@ abstract interface class AuthenticationRepository {
     required String password,
   });
 
+  Future<Result<AuthenticatedUser>> createUserAccount({
+    required String fullName,
+    required String email,
+    required String password,
+    String? profileImageUrl,
+  });
+
   Future<void> signOut();
 }

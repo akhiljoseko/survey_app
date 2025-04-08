@@ -32,4 +32,26 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return Result.error(UnknownException());
     }
   }
+
+  @override
+  Future<Result<AuthenticatedUser>> createUserAccount({
+    required String fullName,
+    required String email,
+    required String password,
+    String? profileImageUrl,
+  }) async {
+    try {
+      final registeredUser = await _service.createUserAccount(
+        fullName: fullName,
+        email: email,
+        password: password,
+        profileImageUrl: profileImageUrl,
+      );
+      return Result.ok(registeredUser);
+    } on AppException catch (e) {
+      return Result.error(e);
+    } catch (e) {
+      return Result.error(UnknownException());
+    }
+  }
 }

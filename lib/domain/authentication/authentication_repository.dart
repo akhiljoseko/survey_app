@@ -16,5 +16,7 @@ abstract interface class AuthenticationRepository {
     String? profileImageUrl,
   });
 
+  Future<Result<bool>> sendPasswordResetEmail(String email);
+
   Future<void> signOut();
 }

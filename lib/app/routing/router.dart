@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_surveys/app/routing/app_routes.dart';
 import 'package:school_surveys/view/authentication/auth_cubit.dart';
+import 'package:school_surveys/view/forgot_password/forgot_password_screen.dart';
 import 'package:school_surveys/view/sign_up/sign_up_screen.dart';
 
 import '../../view/home/home_screen.dart';
@@ -36,6 +37,11 @@ final GoRouter router = GoRouter(
           path: 'signup',
           name: AppRoutes.signup,
           builder: (_, _) => SignupScreen(),
+        ),
+        GoRoute(
+          path: 'passwordreset',
+          name: AppRoutes.resetPassword,
+          builder: (_, _) => ForgotPasswordScreen(),
         ),
       ],
     ),

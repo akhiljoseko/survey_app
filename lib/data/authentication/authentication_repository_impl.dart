@@ -54,4 +54,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return Result.error(UnknownException());
     }
   }
+
+  @override
+  Future<Result<bool>> sendPasswordResetEmail(String email) async {
+    try {
+      final isEmailSent = await _service.sendPasswordResetEmail(email);
+      return Result.ok(isEmailSent);
+    } on AppException catch (e) {
+      return Result.error(e);
+    } catch (e) {
+      return Result.error(UnknownException());
+    }
+  }
 }

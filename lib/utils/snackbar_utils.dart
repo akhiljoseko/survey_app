@@ -25,8 +25,7 @@ class SnackbarUtils {
         backgroundColor: Colors.green.shade800,
         duration: duration,
         elevation: 4,
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         animation: CurvedAnimation(
           parent: const AlwaysStoppedAnimation(1),
           curve: Curves.easeOutCirc,

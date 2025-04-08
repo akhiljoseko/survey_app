@@ -11,11 +11,13 @@ class AuthenticationService {
   Stream<AuthenticatedUser?> get authStateChanges async* {
     yield null;
     await Future.delayed(Duration(seconds: 1));
-    // yield AuthenticatedUser(
-    //   uid: "sdasd",
-    //   email: "akhil@email.com",
-    //   displayName: "Akhil Jose",
-    // );
+    yield AuthenticatedUser(
+      uid: "sdasd",
+      email: "akhil@email.com",
+      displayName: "Akhil Jose",
+      photoURL:
+          "https://cdn.pixabay.com/photo/2022/09/08/15/16/cute-7441224_1280.jpg",
+    );
     yield* _authStateStreamController.stream;
   }
 

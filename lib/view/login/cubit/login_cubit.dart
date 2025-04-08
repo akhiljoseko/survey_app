@@ -18,9 +18,9 @@ class LoginCubit extends Cubit<LoginState> {
       password: password,
     );
     switch (userLoginResult) {
-      case Ok<AuthenticatedUser?>():
+      case Ok<AuthenticatedUser>():
         emit(state.copyWith(isLoading: false, success: true));
-      case Error<AuthenticatedUser?>():
+      case Error<AuthenticatedUser>():
         emit(
           state.copyWith(
             isLoading: false,

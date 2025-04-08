@@ -57,4 +57,9 @@ class AuthenticationService {
     _authStateStreamController.add(user);
     return user;
   }
+
+  Future<bool> sendPasswordResetEmail(String email) async {
+    await Future.delayed(Duration(seconds: 2));
+    return true;
+  }
 }

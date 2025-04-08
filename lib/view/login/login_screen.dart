@@ -85,6 +85,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           validator: ValidationUtils.validatePassword,
                         ),
                         Vspace(24),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed:
+                                () => context.goNamed(AppRoutes.resetPassword),
+                            child: Text("Forgot password?"),
+                          ),
+                        ),
+                        // Vspace(14),
                         PrimaryButton(
                           onPressed: () => _submit(context),
                           label: "Sign in",
@@ -93,9 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         QuestionButton(
                           question: "Don't have an account? ",
                           buttonText: "Sign up",
-                          onPressed: () {
-                            context.goNamed(AppRoutes.signup);
-                          },
+                          onPressed: () => context.goNamed(AppRoutes.signup),
                         ),
                       ],
                     ),

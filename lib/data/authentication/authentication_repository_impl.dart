@@ -16,7 +16,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Stream<AuthenticatedUser?> get authStateChanges => _service.authStateChanges;
 
   @override
-  Future<Result<AuthenticatedUser?>> loginWithEmailAndPassword({
+  Future<Result<AuthenticatedUser>> loginWithEmailAndPassword({
     required String email,
     required String password,
   }) async {

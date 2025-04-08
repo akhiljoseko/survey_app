@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:school_surveys/app/routing/app_routes.dart';
 import 'package:school_surveys/domain/authentication/authentication_repository.dart';
 import 'package:school_surveys/utils/loading_indicator.dart';
 import 'package:school_surveys/utils/snackbar_utils.dart';
@@ -8,6 +10,7 @@ import 'package:school_surveys/view/login/cubit/login_cubit.dart';
 import 'package:school_surveys/view/widgets/email_textfield.dart';
 import 'package:school_surveys/view/widgets/password_textfield.dart';
 import 'package:school_surveys/view/widgets/primary_button.dart';
+import 'package:school_surveys/view/widgets/question_button.dart';
 import 'package:school_surveys/view/widgets/spacing.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,11 +21,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  late final _emailController = TextEditingController();
+  late final _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,36 +58,47 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (context, state) {
             return ScreenPadding(
               child: Center(
-                child: Form(
-                  key: _formKey,
-                  autovalidateMode: _autovalidateMode,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Welcome back!",
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                      Text(
-                        "Sign in to continue",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      Vspace(20),
-                      EmailTextField(
-                        controller: _emailController,
-                        validator: ValidationUtils.validateEmail,
-                      ),
-                      Vspace(12),
-                      PasswordTextField(
-                        controller: _passwordController,
-                        validator: ValidationUtils.validatePassword,
-                      ),
-                      Vspace(24),
-                      PrimaryButton(
-                        onPressed: () => _submit(context),
-                        label: "Sign in",
-                      ),
-                    ],
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    autovalidateMode: _autovalidateMode,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Welcome back!",
+                          style: Theme.of(context).textTheme.headlineLarge
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "Sign in to continue",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        Vspace(20),
+                        EmailTextField(
+                          controller: _emailController,
+                          validator: ValidationUtils.validateEmail,
+                        ),
+                        Vspace(12),
+                        PasswordTextField(
+                          controller: _passwordController,
+                          validator: ValidationUtils.validatePassword,
+                        ),
+                        Vspace(24),
+                        PrimaryButton(
+                          onPressed: () => _submit(context),
+                          label: "Sign in",
+                        ),
+                        Vspace(12),
+                        QuestionButton(
+                          question: "Don't have an account? ",
+                          buttonText: "Sign up",
+                          onPressed: () {
+                            context.goNamed(AppRoutes.signup);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -101,4 +101,11 @@ class ValidationUtils {
         return 'Invalid';
     }
   }
+
+  static String? validateName(String? name) {
+    if (name == null || name.isEmpty) {
+      return 'Please enter your name.';
+    }
+    return null;
+  }
 }

@@ -40,4 +40,21 @@ class AuthenticationService {
     }
     throw InvalidCredentialsException();
   }
+
+  Future<AuthenticatedUser> createUserAccount({
+    required String fullName,
+    required String email,
+    required String password,
+    String? profileImageUrl,
+  }) async {
+    await Future.delayed(Duration(seconds: 2));
+
+    final user = AuthenticatedUser(
+      uid: "adfsdfdd",
+      email: email,
+      displayName: fullName,
+    );
+    _authStateStreamController.add(user);
+    return user;
+  }
 }

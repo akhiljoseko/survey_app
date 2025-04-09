@@ -149,6 +149,7 @@ class _AddSurveyScreenState extends State<AddSurveyScreen> {
                         label: "Create Survey",
                       ),
                 ),
+                Vspace(24),
               ],
             ),
           ),

@@ -40,7 +40,7 @@ class _UserButtonState extends State<UserButton> {
           child: UserCircleAvatar(
             name: user.displayName,
             avatarUrl: user.photoURL,
-            radius: 24,
+            radius: 20,
           ),
         );
       },

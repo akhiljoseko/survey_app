@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:school_surveys/app/routing/app_routes.dart';
 
-class PrimaryButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final String label;
-
-  const PrimaryButton({
-    super.key,
-    required this.onPressed,
-    required this.label,
-  });
+class AddSurveyButton extends StatelessWidget {
+  const AddSurveyButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return ElevatedButton(
+    return ElevatedButton.icon(
+      onPressed: () {
+        context.goNamed(AppRoutes.addSurvey);
+      },
+      label: Text("ADD SURVEY"),
+      icon: Icon(Icons.add_rounded),
       style: ElevatedButton.styleFrom(
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: theme.colorScheme.onPrimary,
@@ -21,8 +21,6 @@ class PrimaryButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         fixedSize: Size(double.maxFinite, 50),
       ),
-      onPressed: onPressed,
-      child: Text(label),
     );
   }
 }

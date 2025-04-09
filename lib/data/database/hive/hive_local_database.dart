@@ -1,6 +1,6 @@
 import 'package:hive_ce/hive.dart';
 
-import '../../../core/no_sql_local_database.dart';
+import '../no_sql_local_database.dart';
 
 class HiveLocalDatabase<T> implements NoSqlLocalDatabase<T> {
   final String collectionName;

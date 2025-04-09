@@ -23,7 +23,7 @@ class EmailTextField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
-
+        helperText: "",
         prefixIcon: const Icon(Icons.email_outlined),
       ),
     );

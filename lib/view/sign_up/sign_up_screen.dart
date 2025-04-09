@@ -65,21 +65,20 @@ class _SignupScreenState extends State<SignupScreen> {
                         controller: _fullNameController,
                         validator: ValidationUtils.validateName,
                         decoration: InputDecoration(
+                          helperText: "",
                           prefixIcon: Icon(Icons.person_outline),
                           labelText: "Full Name",
                         ),
                       ),
-                      Vspace(20),
                       EmailTextField(
                         controller: _emailController,
                         validator: ValidationUtils.validateEmail,
                       ),
-                      Vspace(20),
                       PasswordTextField(
                         controller: _passwordController,
                         validator: ValidationUtils.validatePassword,
                       ),
-                      const SizedBox(height: 24),
+                      Vspace(24),
                       BlocConsumer<SignupCubit, SignupState>(
                         listener: (context, state) {
                           if (state.status == SignupStatus.loading) {

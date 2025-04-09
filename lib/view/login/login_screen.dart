@@ -79,12 +79,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: _emailController,
                           validator: ValidationUtils.validateEmail,
                         ),
-                        Vspace(12),
                         PasswordTextField(
                           controller: _passwordController,
                           validator: ValidationUtils.validatePassword,
                         ),
-                        Vspace(24),
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
@@ -93,7 +91,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Text("Forgot password?"),
                           ),
                         ),
-                        // Vspace(14),
                         PrimaryButton(
                           onPressed: () => _submit(context),
                           label: "Sign in",

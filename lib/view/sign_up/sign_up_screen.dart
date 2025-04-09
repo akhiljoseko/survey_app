@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_surveys/app/routing/app_routes.dart';
-import 'package:school_surveys/domain/authentication/authentication_repository.dart';
+import 'package:school_surveys/domain/repository/authentication_repository.dart';
 import 'package:school_surveys/utils/loading_indicator.dart';
 import 'package:school_surveys/utils/snackbar_utils.dart';
 import 'package:school_surveys/utils/validation_utils.dart';

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_surveys/core/result.dart';
-import 'package:school_surveys/domain/authentication/authentication_repository.dart';
+import 'package:school_surveys/domain/repository/authentication_repository.dart';
 
 part 'forgot_password_state.dart';
 

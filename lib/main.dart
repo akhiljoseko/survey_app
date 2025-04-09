@@ -6,7 +6,7 @@ import 'package:school_surveys/data/authentication/authentication_repository_imp
 import 'package:school_surveys/data/authentication/authentication_service.dart';
 import 'package:school_surveys/data/database/hive/hive_local_database.dart';
 import 'package:school_surveys/data/database/hive/hive_registrar.g.dart';
-import 'package:school_surveys/domain/authentication/authentication_repository.dart';
+import 'package:school_surveys/domain/repository/authentication_repository.dart';
 import 'package:school_surveys/domain/entities/user.dart';
 import 'package:school_surveys/view/authentication/auth_cubit.dart';
 

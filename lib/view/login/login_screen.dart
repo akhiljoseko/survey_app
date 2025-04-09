@@ -45,7 +45,6 @@ class _LoginScreenState extends State<LoginScreen> {
               LoadingIndicator.showLoading(context);
               return;
             }
-
             LoadingIndicator.removeLoading(context);
             if (state.errorMessage != null) {
               SnackbarUtils.showErrorSnackbar(

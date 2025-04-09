@@ -5,4 +5,7 @@ final class AppRoutes {
 
   //Authenticated
   static const home = 'home';
+
+  //Survey
+  static const addSurvey = 'add-survey';
 }

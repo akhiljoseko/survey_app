@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_surveys/app/routing/app_routes.dart';
+import 'package:school_surveys/view/add_survey/add_survey_screen.dart';
 import 'package:school_surveys/view/authentication/auth_cubit.dart';
 import 'package:school_surveys/view/forgot_password/forgot_password_screen.dart';
 import 'package:school_surveys/view/sign_up/sign_up_screen.dart';
@@ -50,6 +51,15 @@ final GoRouter router = GoRouter(
       path: '/',
       name: AppRoutes.home,
       builder: (context, state) => HomeScreen(),
+      routes: [
+        GoRoute(
+          path: "add-survey",
+          name: AppRoutes.addSurvey,
+          builder: (_, _) {
+            return const AddSurveyScreen();
+          },
+        ),
+      ],
     ),
   ],
 );

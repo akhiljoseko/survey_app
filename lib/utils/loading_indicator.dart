@@ -3,7 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:school_surveys/view/widgets/spacing.dart';
 
 class LoadingIndicator {
+  static bool _isDialogOpen = false;
   static void showLoading(BuildContext context, {String? loadingMessage}) {
+    if (_isDialogOpen) {
+      return;
+    }
+    _isDialogOpen = true;
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -32,6 +37,11 @@ class LoadingIndicator {
   }
 
   static void removeLoading(BuildContext context) {
-    context.pop();
+    if (_isDialogOpen) {
+      _isDialogOpen = false;
+      if (context.canPop()) {
+        context.pop();
+      }
+    }
   }
 }

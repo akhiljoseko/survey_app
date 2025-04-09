@@ -93,4 +93,8 @@ class AuthenticationService {
       throw AccountNotFound();
     }
   }
+
+  Future<List<User>> getAllUsers() async {
+    return await _database.getAll();
+  }
 }

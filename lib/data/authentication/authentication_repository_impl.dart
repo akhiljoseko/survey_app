@@ -1,7 +1,7 @@
 import 'package:school_surveys/core/app_exception.dart';
 import 'package:school_surveys/core/result.dart';
 import 'package:school_surveys/data/authentication/authentication_service.dart';
-import 'package:school_surveys/domain/authentication/authenticated_user.dart';
+import 'package:school_surveys/domain/entities/user.dart';
 import 'package:school_surveys/domain/authentication/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
@@ -13,10 +13,10 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Future<void> signOut() => _service.signOut();
 
   @override
-  Stream<AuthenticatedUser?> get authStateChanges => _service.authStateChanges;
+  Stream<User?> get authStateChanges => _service.authStateChanges;
 
   @override
-  Future<Result<AuthenticatedUser>> loginWithEmailAndPassword({
+  Future<Result<User>> loginWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -34,7 +34,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  Future<Result<AuthenticatedUser>> createUserAccount({
+  Future<Result<User>> createUserAccount({
     required String fullName,
     required String email,
     required String password,

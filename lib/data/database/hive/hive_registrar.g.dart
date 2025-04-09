@@ -7,6 +7,8 @@ import 'package:school_surveys/data/database/hive/hive_adapters.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
+    registerAdapter(SurveyAdapter());
+    registerAdapter(SurveyStatusAdapter());
     registerAdapter(UserAdapter());
   }
 }

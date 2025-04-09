@@ -18,5 +18,7 @@ abstract interface class AuthenticationRepository {
 
   Future<Result<bool>> sendPasswordResetEmail(String email);
 
+  Future<Result<List<User>>> getAllUsers();
+
   Future<void> signOut();
 }

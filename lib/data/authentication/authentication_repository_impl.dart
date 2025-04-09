@@ -66,4 +66,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return Result.error(UnknownException());
     }
   }
+
+  @override
+  Future<Result<List<User>>> getAllUsers() async {
+    try {
+      final users = await _service.getAllUsers();
+      return Result.ok(users);
+    } on AppException catch (e) {
+      return Result.error(e);
+    } catch (e) {
+      return Result.error(UnknownException());
+    }
+  }
 }

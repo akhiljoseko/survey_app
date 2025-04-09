@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_surveys/domain/entities/user.dart';
-import 'package:school_surveys/domain/authentication/authentication_repository.dart';
+import 'package:school_surveys/domain/repository/authentication_repository.dart';
 
 part 'auth_state.dart';
 

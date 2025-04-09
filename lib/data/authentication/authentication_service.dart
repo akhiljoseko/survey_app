@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:school_surveys/core/no_sql_local_database.dart';
+import 'package:school_surveys/data/database/no_sql_local_database.dart';
 import 'package:school_surveys/data/authentication/authentication_exceptions.dart';
 import 'package:school_surveys/domain/entities/user.dart';
 import 'package:uuid/uuid.dart';

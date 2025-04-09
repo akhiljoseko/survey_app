@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_surveys/core/result.dart';
-import 'package:school_surveys/domain/authentication/authenticated_user.dart';
+import 'package:school_surveys/domain/entities/user.dart';
 import 'package:school_surveys/domain/authentication/authentication_repository.dart';
 
 part 'sign_up_state.dart';
@@ -25,9 +25,9 @@ class SignupCubit extends Cubit<SignupState> {
       profileImageUrl: profileImageUrl,
     );
     switch (signUpResult) {
-      case Ok<AuthenticatedUser>():
+      case Ok<User>():
         emit(state.copyWith(status: SignupStatus.success));
-      case Error<AuthenticatedUser>():
+      case Error<User>():
         emit(
           state.copyWith(
             status: SignupStatus.error,

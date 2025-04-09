@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:school_surveys/domain/authentication/authenticated_user.dart';
+import 'package:school_surveys/domain/entities/user.dart';
 import 'package:school_surveys/domain/authentication/authentication_repository.dart';
 
 part 'auth_state.dart';
@@ -18,9 +18,9 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  late final StreamSubscription<AuthenticatedUser?> _authStateSubscription;
+  late final StreamSubscription<User?> _authStateSubscription;
 
-  void _updateAuthState(AuthenticatedUser? user) {
+  void _updateAuthState(User? user) {
     final isLoggedIn = user != null;
     if (!isLoggedIn) {
       emit(const AuthState(status: AuthStatus.unauthenticated));

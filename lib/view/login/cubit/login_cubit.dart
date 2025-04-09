@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:school_surveys/core/result.dart';
-import 'package:school_surveys/domain/authentication/authenticated_user.dart';
+import 'package:school_surveys/domain/entities/user.dart';
 import 'package:school_surveys/domain/authentication/authentication_repository.dart';
 
 part 'login_state.dart';
@@ -18,9 +18,9 @@ class LoginCubit extends Cubit<LoginState> {
       password: password,
     );
     switch (userLoginResult) {
-      case Ok<AuthenticatedUser>():
+      case Ok<User>():
         emit(state.copyWith(isLoading: false, success: true));
-      case Error<AuthenticatedUser>():
+      case Error<User>():
         emit(
           state.copyWith(
             isLoading: false,

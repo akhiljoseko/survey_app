@@ -18,4 +18,6 @@ abstract interface class SurveyRepository {
   });
 
   Future<Result<List<Survey>>> getSurveysByStatus(SurveyStatus status);
+
+  Future<Result<Survey>> updateSurvey(Survey survey);
 }

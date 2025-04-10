@@ -50,7 +50,13 @@ class SurveyService {
   Future<List<Survey>> getSurveysByStatus({
     required SurveyStatus status,
   }) async {
+    await Future.delayed(_delayDuration);
     final allSurveys = await _surveyDatabase.getAll();
     return allSurveys.where((sr) => sr.status == status).toList();
+  }
+
+  Future<Survey> updateSurvey(Survey survey) async {
+    await Future.delayed(_delayDuration);
+    return await _surveyDatabase.update(survey.id, survey);
   }
 }

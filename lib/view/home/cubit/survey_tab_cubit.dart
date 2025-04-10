@@ -13,10 +13,10 @@ class SurveyTabCubit extends Cubit<SurveyTabState> {
 
   SurveyTabCubit(this._surveyRepository, this.status)
     : super(SurveyTabInitial()) {
-    _loadSurveys();
+    loadSurveys();
   }
 
-  Future<void> _loadSurveys() async {
+  Future<void> loadSurveys() async {
     emit(SurveyTabLoading());
 
     final surveysResult = await _surveyRepository.getSurveysByStatus(status);

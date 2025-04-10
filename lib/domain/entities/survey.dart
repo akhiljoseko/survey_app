@@ -26,6 +26,22 @@ class Survey extends BaseEntity {
     required this.status,
   });
 
+  Survey copyWith({SurveyStatus? status}) {
+    return Survey(
+      id: id,
+      createdAt: createdAt,
+      urn: urn,
+      name: name,
+      description: description,
+      commencementDate: commencementDate,
+      dueDate: dueDate,
+      assignedTo: assignedTo,
+      assignedBy: assignedBy,
+      createdBy: createdBy,
+      status: status ?? this.status,
+    );
+  }
+
   @override
   List<Object?> get props => [
     id,

@@ -105,23 +105,30 @@ class SurveyListTile extends StatelessWidget {
                               break;
                           }
                         },
-                        itemBuilder:
-                            (_) => const [
-                              PopupMenuItem(
-                                value: 'start',
-                                child: Row(children: [Text('Start')]),
-                              ),
-                              PopupMenuItem(value: 'edit', child: Text('Edit')),
-                              PopupMenuItem(
-                                value: 'delete',
-                                child: Text('Delete'),
-                              ),
-                            ],
+                        itemBuilder: (_) => _buildActions(survey),
                       ),
             ),
           );
         },
       ),
     );
+  }
+
+  List<PopupMenuEntry<String>> _buildActions(Survey survey) {
+    final status = survey.status;
+    final actions = <PopupMenuEntry<String>>[];
+
+    if (status == SurveyStatus.scheduled) {
+      actions.add(const PopupMenuItem(value: 'start', child: Text('Start')));
+      actions.add(const PopupMenuItem(value: 'edit', child: Text('Edit')));
+      actions.add(const PopupMenuItem(value: 'delete', child: Text('Delete')));
+    } else if (status == SurveyStatus.completed) {
+      actions.add(const PopupMenuItem(value: 'delete', child: Text('Delete')));
+    } else if (status == SurveyStatus.withheld) {
+      actions.add(const PopupMenuItem(value: 'edit', child: Text('Edit')));
+      actions.add(const PopupMenuItem(value: 'start', child: Text('Start')));
+    }
+
+    return actions;
   }
 }

@@ -11,7 +11,12 @@ class SurveyApp extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) => router.refresh(),
       builder: (context, state) {
-        return MaterialApp.router(routerConfig: router);
+        return MaterialApp.router(
+          routerConfig: router,
+          themeMode: ThemeMode.dark,
+          darkTheme: ThemeData.dark(),
+          theme: ThemeData.light(),
+        );
       },
     );
   }

@@ -13,7 +13,7 @@ class SurveyApp extends StatelessWidget {
       builder: (context, state) {
         return MaterialApp.router(
           routerConfig: router,
-          themeMode: ThemeMode.dark,
+          themeMode: ThemeMode.light,
           darkTheme: ThemeData.dark(),
           theme: ThemeData.light(),
         );

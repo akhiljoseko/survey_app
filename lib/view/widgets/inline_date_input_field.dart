@@ -8,12 +8,16 @@ class InlineDateInput extends StatefulWidget {
     required this.onDateSelected,
     this.validator,
     required this.label,
+    this.enabledDateRangeStart,
+    this.enabledDateRangeEnd,
   });
 
   final DateTime? initialDate;
   final void Function(DateTime? date) onDateSelected;
   final String? Function(DateTime?)? validator;
   final String label;
+  final DateTime? enabledDateRangeStart;
+  final DateTime? enabledDateRangeEnd;
 
   @override
   State<InlineDateInput> createState() => _InlineDateInputState();
@@ -58,8 +62,10 @@ class _InlineDateInputState extends State<InlineDateInput> {
     final date = await showDatePicker(
       context: context,
       useRootNavigator: true,
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365 * 10)),
+      firstDate: widget.enabledDateRangeStart ?? DateTime.now(),
+      lastDate:
+          widget.enabledDateRangeEnd ??
+          DateTime.now().add(Duration(days: 365 * 10)),
       initialDate: _selectedDate ?? DateTime.now(),
     );
     if (date != null) {

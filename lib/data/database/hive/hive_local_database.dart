@@ -1,4 +1,5 @@
 import 'package:hive_ce/hive.dart';
+import 'package:school_surveys/data/database/data_base_exceptions.dart';
 
 import '../no_sql_local_database.dart';
 
@@ -35,7 +36,9 @@ class HiveLocalDatabase<T> implements NoSqlLocalDatabase<T> {
   Future<T> update(String id, T updatedDocument) async {
     final box = await _openBox();
     if (!box.containsKey(id)) {
-      throw Exception('Document with the given ID does not exist.');
+      throw RecordNotFoundException(
+        message: 'Document with the given ID($id) does not exist.',
+      );
     }
     await box.put(id, updatedDocument);
     return updatedDocument;

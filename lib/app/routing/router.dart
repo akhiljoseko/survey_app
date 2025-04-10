@@ -5,6 +5,7 @@ import 'package:school_surveys/view/add_survey/add_survey_screen.dart';
 import 'package:school_surveys/view/authentication/auth_cubit.dart';
 import 'package:school_surveys/view/forgot_password/forgot_password_screen.dart';
 import 'package:school_surveys/view/sign_up/sign_up_screen.dart';
+import 'package:school_surveys/view/survey_commencement/survey_commencement_screen.dart';
 
 import '../../view/home/home_screen.dart';
 import '../../view/login/login_screen.dart';
@@ -53,10 +54,18 @@ final GoRouter router = GoRouter(
       builder: (context, state) => HomeScreen(),
       routes: [
         GoRoute(
-          path: "add-survey",
+          path: "survey/add",
           name: AppRoutes.addSurvey,
           builder: (_, _) {
             return const AddSurveyScreen();
+          },
+        ),
+        GoRoute(
+          path: "survey/:id/commencement",
+          name: AppRoutes.surveyCommencement,
+          builder: (_, state) {
+            final surveyId = state.pathParameters['id'];
+            return SurveyCommencementScreen(surveyId: surveyId!);
           },
         ),
       ],

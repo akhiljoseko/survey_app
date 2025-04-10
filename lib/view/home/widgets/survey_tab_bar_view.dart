@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:school_surveys/app/routing/app_routes.dart';
 import 'package:school_surveys/domain/entities/survey.dart';
 import 'package:school_surveys/domain/enums/survey_status.dart';
 import 'package:school_surveys/view/home/cubit/survey_tab_cubit.dart';
@@ -40,7 +42,12 @@ class SurveyTabBarView extends StatelessWidget {
     );
   }
 
-  void _startSurvey(BuildContext context, Survey survey) {}
+  void _startSurvey(BuildContext context, Survey survey) {
+    context.goNamed(
+      AppRoutes.surveyCommencement,
+      pathParameters: {"id": survey.id},
+    );
+  }
 
   void _editSurvey(BuildContext context, Survey survey) {}
 }

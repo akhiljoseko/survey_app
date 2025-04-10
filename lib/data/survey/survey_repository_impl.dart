@@ -64,4 +64,16 @@ class SurveyRepositoryImpl implements SurveyRepository {
       return Result.error(UnknownException());
     }
   }
+
+  @override
+  Future<Result<List<Survey>>> getSurveysByStatus(SurveyStatus status) async {
+    try {
+      final surveys = await _surveyService.getSurveysByStatus(status: status);
+      return Result.ok(surveys);
+    } on AppException catch (e) {
+      return Result.error(e);
+    } catch (_) {
+      return Result.error(UnknownException());
+    }
+  }
 }

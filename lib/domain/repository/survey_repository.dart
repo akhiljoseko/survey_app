@@ -16,4 +16,6 @@ abstract interface class SurveyRepository {
     required String createdBy,
     required SurveyStatus status,
   });
+
+  Future<Result<List<Survey>>> getSurveysByStatus(SurveyStatus status);
 }

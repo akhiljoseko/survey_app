@@ -46,4 +46,11 @@ class SurveyService {
       (surveys) => surveys.any((survey) => survey.urn == urn),
     );
   }
+
+  Future<List<Survey>> getSurveysByStatus({
+    required SurveyStatus status,
+  }) async {
+    final allSurveys = await _surveyDatabase.getAll();
+    return allSurveys.where((sr) => sr.status == status).toList();
+  }
 }

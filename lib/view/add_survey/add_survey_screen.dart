@@ -8,7 +8,7 @@ import 'package:school_surveys/utils/snackbar_utils.dart';
 import 'package:school_surveys/view/add_survey/cubit/add_survey_cubit.dart';
 import 'package:school_surveys/view/add_survey/survey_from_validations.dart';
 import 'package:school_surveys/view/authentication/auth_cubit.dart';
-import 'package:school_surveys/view/home/widgets/user_button.dart';
+import 'package:school_surveys/view/widgets/user_button.dart';
 import 'package:school_surveys/view/widgets/inline_date_input_field.dart';
 import 'package:school_surveys/view/widgets/primary_button.dart';
 import 'package:school_surveys/view/widgets/spacing.dart';

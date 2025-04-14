@@ -59,7 +59,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       name: AppRoutes.home,
-      builder: (context, state) => HomeScreen(),
+      builder: (context, state) {
+        final tabIndex = state.uri.queryParameters['tab'];
+        return HomeScreen(tabIndex: tabIndex);
+      },
       routes: [
         GoRoute(
           path: "survey/add",

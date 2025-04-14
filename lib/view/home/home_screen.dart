@@ -9,7 +9,9 @@ import 'package:school_surveys/view/home/widgets/survey_tab_bar_view.dart';
 import 'package:school_surveys/view/widgets/user_button.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, this.tabIndex});
+
+  final String? tabIndex;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -18,11 +20,23 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late final _tabController = TabController(length: 3, vsync: this);
+
+  @override
+  void didUpdateWidget(covariant HomeScreen oldWidget) {
+    if (widget.tabIndex != oldWidget.tabIndex) {
+      final index = int.tryParse(widget.tabIndex ?? "0") ?? 0;
+      _tabController.animateTo(index);
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => context.goNamed(AppRoutes.addSurvey),
+        onPressed: () {
+          context.goNamed(AppRoutes.addSurvey);
+        },
         label: Text("Add Survey"),
         icon: Icon(Icons.add_rounded),
       ),

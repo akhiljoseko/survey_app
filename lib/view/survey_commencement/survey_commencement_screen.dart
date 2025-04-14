@@ -78,7 +78,7 @@ class _SurveyCommencementContentState
           );
         }
         if (state.isCompleted) {
-          context.goNamed(AppRoutes.home);
+          context.goNamed(AppRoutes.home, queryParameters: {"tab": "1"});
         }
       },
       child: Column(

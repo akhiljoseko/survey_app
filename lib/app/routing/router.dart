@@ -18,14 +18,15 @@ final GoRouter router = GoRouter(
   redirect: (context, state) {
     final authStatus = context.read<AuthCubit>().state.status;
     final loggingIn = state.matchedLocation.startsWith('/login');
+    final isSplash = state.matchedLocation.startsWith('/splash');
 
-    if (authStatus == AuthStatus.unknown) return '/login/splash';
+    if (authStatus == AuthStatus.unknown) return '/splash';
 
     if (authStatus == AuthStatus.unauthenticated && !loggingIn) {
       return '/login';
     }
 
-    if (authStatus == AuthStatus.authenticated && loggingIn) {
+    if (authStatus == AuthStatus.authenticated && (loggingIn || isSplash)) {
       return '/';
     }
 
@@ -33,15 +34,15 @@ final GoRouter router = GoRouter(
   },
   routes: [
     GoRoute(
+      path: '/splash',
+      name: AppRoutes.splash,
+      builder: (_, __) => const SplashScreen(),
+    ),
+    GoRoute(
       path: '/login',
       name: AppRoutes.login,
       builder: (_, _) => LoginScreen(),
       routes: [
-        GoRoute(
-          path: 'splash',
-          name: AppRoutes.splash,
-          builder: (_, __) => const SplashScreen(),
-        ),
         GoRoute(
           path: 'signup',
           name: AppRoutes.signup,

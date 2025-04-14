@@ -10,4 +10,5 @@ final class AppRoutes {
   static const addSurvey = 'add-survey';
   static const surveyCommencement = 'survey-commencement';
   static const viewSurvey = 'view-survey';
+  static const editSurvey = 'edit-survey';
 }

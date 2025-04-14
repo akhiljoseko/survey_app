@@ -49,5 +49,7 @@ class SurveyTabBarView extends StatelessWidget {
     );
   }
 
-  void _editSurvey(BuildContext context, Survey survey) {}
+  void _editSurvey(BuildContext context, Survey survey) {
+    context.goNamed(AppRoutes.editSurvey, pathParameters: {"id": survey.id});
+  }
 }

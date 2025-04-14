@@ -25,7 +25,7 @@ class GeneralDataCubit extends Cubit<GeneralDataState> {
           emit(GeneralDataLoaded(existingGeneralDataIfAnyResult.value!));
         }
       case Error<SurveyGeneralData?>():
-      // TODO: Handle error gracefully
+        emit(GeneralDataInitial());
     }
   }
 
@@ -39,9 +39,7 @@ class GeneralDataCubit extends Cubit<GeneralDataState> {
       case Ok<SurveyGeneralData>():
         emit(GeneralDataLoaded(generalDataSaveResult.value));
       case Error<SurveyGeneralData>():
-      // TODO: Handle this case.
+        emit(GeneralDataSaveFailure(generalDataSaveResult.error.message));
     }
   }
-
-  void updateSchoolCount(int value) {}
 }

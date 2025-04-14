@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:school_surveys/app/routing/app_routes.dart';
 import 'package:school_surveys/core/result.dart';
 import 'package:school_surveys/domain/entities/survey.dart';
 import 'package:school_surveys/domain/enums/survey_status.dart';
@@ -75,13 +77,18 @@ class SurveyListTile extends StatelessWidget {
           final isLoading = state is SurveyActionInProgress;
 
           return Card(
-            elevation: 1.5,
+            elevation: 1,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
             child: ListTile(
               title: Text(survey.name),
               subtitle: Text('URN: ${survey.urn}'),
+              onTap:
+                  () => context.goNamed(
+                    AppRoutes.viewSurvey,
+                    pathParameters: {'id': survey.id},
+                  ),
               trailing:
                   isLoading
                       ? const SizedBox(

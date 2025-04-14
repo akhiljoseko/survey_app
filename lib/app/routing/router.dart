@@ -6,6 +6,7 @@ import 'package:school_surveys/view/authentication/auth_cubit.dart';
 import 'package:school_surveys/view/forgot_password/forgot_password_screen.dart';
 import 'package:school_surveys/view/sign_up/sign_up_screen.dart';
 import 'package:school_surveys/view/survey_commencement/survey_commencement_screen.dart';
+import 'package:school_surveys/view/survey_meta_view/suvey_meta_view_screen.dart';
 
 import '../../view/home/home_screen.dart';
 import '../../view/login/login_screen.dart';
@@ -66,6 +67,14 @@ final GoRouter router = GoRouter(
           builder: (_, state) {
             final surveyId = state.pathParameters['id'];
             return SurveyCommencementScreen(surveyId: surveyId!);
+          },
+        ),
+        GoRoute(
+          path: "survey/:id/view",
+          name: AppRoutes.viewSurvey,
+          builder: (_, state) {
+            final surveyId = state.pathParameters['id'];
+            return SurveyMetaViewScreen(surveyId: surveyId!);
           },
         ),
       ],

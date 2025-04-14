@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:school_surveys/domain/entities/user.dart';
 import 'package:school_surveys/domain/repository/authentication_repository.dart';
 import 'package:school_surveys/domain/repository/survey_repository.dart';
 import 'package:school_surveys/utils/loading_indicator.dart';
@@ -32,12 +33,12 @@ class _AddSurveyScreenState extends State<AddSurveyScreen> {
   DateTime? commencementDate;
   DateTime? _dueDate;
 
-  String? _assignedTo;
-  String? _assignedBy;
+  User? _assignedTo;
+  User? _assignedBy;
 
   @override
   Widget build(BuildContext context) {
-    _assignedBy = context.read<AuthCubit>().state.user!.id;
+    _assignedBy = context.read<AuthCubit>().state.user!;
     return BlocProvider(
       create: (context) => AddSurveyCubit(context.read<SurveyRepository>()),
       child: Scaffold(
@@ -84,8 +85,9 @@ class _AddSurveyScreenState extends State<AddSurveyScreen> {
                 ),
                 UserDropdownButton(
                   label: "Assigned To",
-                  validator: SurveyFormValidations.validateAssignedTo,
-                  initialSelectedUserId: _assignedTo,
+                  validator:
+                      (us) => SurveyFormValidations.validateAssignedTo(us?.id),
+                  initialSelectedUser: _assignedTo,
                   fetchUsers:
                       context.read<AuthenticationRepository>().getAllUsers,
                   onChanged: (userId) => _assignedTo = userId,
@@ -94,7 +96,7 @@ class _AddSurveyScreenState extends State<AddSurveyScreen> {
                 UserDropdownButton(
                   label: "Assigned By",
                   enabled: false,
-                  initialSelectedUserId: _assignedBy,
+                  initialSelectedUser: _assignedBy,
                   fetchUsers:
                       context.read<AuthenticationRepository>().getAllUsers,
                   onChanged: (userId) => _assignedBy = userId,
@@ -173,7 +175,7 @@ class _AddSurveyScreenState extends State<AddSurveyScreen> {
       startDate: commencementDate!,
       dueDate: _dueDate!,
       assignedTo: _assignedTo!,
-      assignedBy: currentUser.id,
+      assignedBy: currentUser,
       createdBy: currentUser.id,
     );
   }

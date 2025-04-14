@@ -4,6 +4,7 @@ import 'package:school_surveys/core/result.dart';
 import 'package:school_surveys/domain/entities/school_data.dart';
 import 'package:school_surveys/domain/entities/survey.dart';
 import 'package:school_surveys/domain/entities/survey_general_data.dart';
+import 'package:school_surveys/domain/entities/user.dart';
 import 'package:school_surveys/domain/repository/survey_repository.dart';
 
 part 'survey_meta_view_state.dart';
@@ -21,6 +22,14 @@ class SurveyMetaViewCubit extends Cubit<SurveyMetaViewState> {
       emit(SurveyMetaViewError((surveyResult as Error<Survey?>).error.message));
       return;
     }
+    final survey = (surveyResult as Ok<Survey?>).value;
+    if (survey == null) {
+      emit(
+        SurveyMetaViewError("Couldn't retrieve survey data. Please try again"),
+      );
+      return;
+    }
+
     final generalDataResult = await _repository.getGeneralData(surveyId);
     SurveyGeneralData? generalData;
     if (generalDataResult is Ok<SurveyGeneralData?>) {
@@ -35,10 +44,27 @@ class SurveyMetaViewCubit extends Cubit<SurveyMetaViewState> {
 
     emit(
       SurveyMetaViewLoaded(
-        survey: (surveyResult as Ok<Survey?>).value!,
+        survey: survey,
         generalData: generalData,
         schools: schooldata,
       ),
     );
   }
+}
+
+class SurveyData extends Equatable {
+  final Survey survey;
+  final SurveyGeneralData? generalData;
+  final List<SchoolData> schools;
+  final List<User> relatedUsers;
+
+  const SurveyData({
+    required this.survey,
+    required this.generalData,
+    required this.schools,
+    required this.relatedUsers,
+  });
+
+  @override
+  List<Object?> get props => [survey, generalData, schools, relatedUsers];
 }

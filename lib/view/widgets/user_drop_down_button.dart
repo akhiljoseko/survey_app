@@ -7,7 +7,7 @@ import 'package:school_surveys/domain/entities/user.dart';
 
 class AssignedUserState {
   final List<User> userList;
-  final String? selectedUserId;
+  final User? selectedUserId;
   final bool isLoading;
   final String? error;
 
@@ -20,7 +20,7 @@ class AssignedUserState {
 
   AssignedUserState copyWith({
     List<User>? userList,
-    String? selectedUserId,
+    User? selectedUserId,
     bool? isLoading,
     String? error,
   }) {
@@ -36,7 +36,7 @@ class AssignedUserState {
 class AssignedUserCubit extends Cubit<AssignedUserState> {
   final Future<Result<List<User>>> Function() fetchUsers;
 
-  AssignedUserCubit({required this.fetchUsers, String? initialSelectedUserId})
+  AssignedUserCubit({required this.fetchUsers, User? initialSelectedUserId})
     : super(
         AssignedUserState(userList: [], selectedUserId: initialSelectedUserId),
       ) {
@@ -54,7 +54,9 @@ class AssignedUserCubit extends Cubit<AssignedUserState> {
             userList: result.value,
             selectedUserId:
                 state.selectedUserId != null &&
-                        result.value.any((u) => u.id == state.selectedUserId)
+                        result.value.any(
+                          (u) => u.id == state.selectedUserId?.id,
+                        )
                     ? state.selectedUserId
                     : null,
           ),
@@ -64,7 +66,7 @@ class AssignedUserCubit extends Cubit<AssignedUserState> {
     }
   }
 
-  void selectUser(String? userId) {
+  void selectUser(User? userId) {
     emit(state.copyWith(selectedUserId: userId));
   }
 }
@@ -74,10 +76,10 @@ class AssignedUserCubit extends Cubit<AssignedUserState> {
 class UserDropdownButton extends StatelessWidget {
   final Future<Result<List<User>>> Function() fetchUsers;
   final String label;
-  final FormFieldValidator<String>? validator;
+  final FormFieldValidator<User>? validator;
   final bool enabled;
-  final String? initialSelectedUserId;
-  final ValueChanged<String?>? onChanged;
+  final User? initialSelectedUser;
+  final ValueChanged<User?>? onChanged;
 
   const UserDropdownButton({
     super.key,
@@ -85,7 +87,7 @@ class UserDropdownButton extends StatelessWidget {
     required this.label,
     this.validator,
     this.enabled = true,
-    this.initialSelectedUserId,
+    this.initialSelectedUser,
     this.onChanged,
   });
 
@@ -95,11 +97,11 @@ class UserDropdownButton extends StatelessWidget {
       create:
           (_) => AssignedUserCubit(
             fetchUsers: fetchUsers,
-            initialSelectedUserId: initialSelectedUserId,
+            initialSelectedUserId: initialSelectedUser,
           ),
       child: BlocBuilder<AssignedUserCubit, AssignedUserState>(
         builder: (context, state) {
-          return DropdownButtonFormField<String>(
+          return DropdownButtonFormField<User>(
             value: state.selectedUserId,
             decoration: InputDecoration(
               errorText: state.error,
@@ -115,10 +117,10 @@ class UserDropdownButton extends StatelessWidget {
                     }
                     : null,
 
-            items: List<DropdownMenuItem<String>>.from(
+            items: List<DropdownMenuItem<User>>.from(
               state.userList.map(
-                (us) => DropdownMenuItem<String>(
-                  value: us.id,
+                (us) => DropdownMenuItem<User>(
+                  value: us,
                   child: Text(us.displayName),
                 ),
               ),

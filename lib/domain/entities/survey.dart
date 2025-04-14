@@ -1,4 +1,5 @@
 import 'package:school_surveys/domain/entities/base_entity.dart';
+import 'package:school_surveys/domain/entities/user.dart';
 import 'package:school_surveys/domain/enums/survey_status.dart';
 
 class Survey extends BaseEntity {
@@ -7,8 +8,8 @@ class Survey extends BaseEntity {
   final String description;
   final DateTime commencementDate;
   final DateTime dueDate;
-  final String assignedTo;
-  final String assignedBy;
+  final User assignedTo;
+  final User assignedBy;
   final String createdBy;
   final SurveyStatus status;
 

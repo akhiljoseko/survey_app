@@ -6,6 +6,7 @@ import 'package:school_surveys/domain/entities/survey_general_data.dart';
 import 'package:school_surveys/domain/constants/curriculum.dart';
 import 'package:school_surveys/domain/constants/grade_level.dart';
 import 'package:school_surveys/domain/constants/school_type.dart';
+import 'package:school_surveys/domain/entities/user.dart';
 import 'package:school_surveys/domain/enums/survey_status.dart';
 import 'package:uuid/uuid.dart';
 
@@ -30,8 +31,8 @@ class SurveyService {
     required String description,
     required DateTime commencementDate,
     required DateTime dueDate,
-    required String assignedTo,
-    required String assignedBy,
+    required User assignedTo,
+    required User assignedBy,
     required String createdBy,
     required SurveyStatus status,
   }) async {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_surveys/domain/repository/survey_repository.dart';
 import 'package:school_surveys/view/survey_meta_view/cubit/survey_meta_view_cubit.dart';
+import 'package:school_surveys/view/widgets/spacing.dart';
 
 class SurveyMetaViewScreen extends StatelessWidget {
   final String surveyId;
@@ -24,7 +25,7 @@ class SurveyMetaViewScreen extends StatelessWidget {
             } else if (state is SurveyMetaViewError) {
               return Center(child: Text(state.message));
             } else if (state is SurveyMetaViewLoaded) {
-              final s = state.survey;
+              final survey = state.survey;
               final general = state.generalData;
               final schools = state.schools;
 
@@ -32,28 +33,42 @@ class SurveyMetaViewScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 children: [
                   _sectionCard(
+                    context,
                     title: "Survey Metadata",
                     children: [
-                      _metaTile("URN", s.urn),
-                      _metaTile("Status", s.status.name),
-                      _metaTile("Assigned To", s.assignedTo),
-                      _metaTile("Assigned By", s.assignedBy),
-                      _metaTile("Due Date", _formatDate(s.dueDate)),
-                      _metaTile(
+                      _MetaTile("URN", survey.urn),
+                      _MetaTile("Status", survey.status.name),
+                      _MetaTile("Assigned To", survey.assignedTo.displayName),
+                      _MetaTile("Assigned By", survey.assignedBy.displayName),
+                      _MetaTile("Due Date", _formatDate(survey.dueDate)),
+                      _MetaTile(
                         "Commencement Date",
-                        _formatDate(s.commencementDate),
+                        _formatDate(survey.commencementDate),
+                      ),
+                      Vspace(12),
+                      Text(
+                        "Description",
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Vspace(4),
+                      Text(
+                        survey.description,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],
                   ),
 
-                  const SizedBox(height: 20),
+                  const Vspace(20),
                   _sectionCard(
+                    context,
                     title: "General Survey Info",
                     children:
                         general != null
                             ? [
-                              _metaTile("Area Name", general.areaName),
-                              _metaTile(
+                              _MetaTile("Area Name", general.areaName),
+                              _MetaTile(
                                 "Number of Schools",
                                 general.numberOfSchools.toString(),
                               ),
@@ -69,8 +84,9 @@ class SurveyMetaViewScreen extends StatelessWidget {
                             ],
                   ),
 
-                  const SizedBox(height: 20),
+                  const Vspace(20),
                   _sectionCard(
+                    context,
                     title: "School Details",
                     children:
                         schools.isEmpty
@@ -97,19 +113,19 @@ class SurveyMetaViewScreen extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 4),
-                                    _metaTile("Name", school.schoolName),
-                                    _metaTile("Type", school.schoolType.label),
-                                    _metaTile(
+                                    _MetaTile("Name", school.schoolName),
+                                    _MetaTile("Type", school.schoolType.label),
+                                    _MetaTile(
                                       "Established",
                                       _formatDate(school.establishedOn),
                                     ),
-                                    _metaTile(
+                                    _MetaTile(
                                       "Curriculum",
                                       school.curriculum
                                           .map((c) => c.label)
                                           .join(', '),
                                     ),
-                                    _metaTile(
+                                    _MetaTile(
                                       "Grades",
                                       school.gradesPresent
                                           .map((g) => g.label)
@@ -132,19 +148,11 @@ class SurveyMetaViewScreen extends StatelessWidget {
     );
   }
 
-  Widget _metaTile(String title, String value) {
-    return ListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-      ),
-      subtitle: Text(value, style: const TextStyle(fontSize: 14)),
-    );
-  }
-
-  Widget _sectionCard({required String title, required List<Widget> children}) {
+  Widget _sectionCard(
+    BuildContext context, {
+    required String title,
+    required List<Widget> children,
+  }) {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -155,7 +163,9 @@ class SurveyMetaViewScreen extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Divider(height: 20),
             ...children,
@@ -168,5 +178,27 @@ class SurveyMetaViewScreen extends StatelessWidget {
   String _formatDate(DateTime? date) {
     if (date == null) return "—";
     return "${date.day}/${date.month}/${date.year}";
+  }
+}
+
+class _MetaTile extends StatelessWidget {
+  const _MetaTile(this.title, this.value);
+
+  final String title;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      dense: true,
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        title,
+        style: Theme.of(
+          context,
+        ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
+      ),
+      subtitle: Text(value, style: Theme.of(context).textTheme.bodySmall),
+    );
   }
 }

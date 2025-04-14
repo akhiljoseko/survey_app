@@ -73,8 +73,8 @@ class SurveyAdapter extends TypeAdapter<Survey> {
       description: fields[2] as String,
       commencementDate: fields[3] as DateTime,
       dueDate: fields[4] as DateTime,
-      assignedTo: fields[5] as String,
-      assignedBy: fields[6] as String,
+      assignedTo: fields[5] as User,
+      assignedBy: fields[6] as User,
       createdBy: fields[7] as String,
       status: fields[8] as SurveyStatus,
     );

@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_surveys/core/result.dart';
 import 'package:school_surveys/domain/entities/survey.dart';
+import 'package:school_surveys/domain/entities/user.dart';
 import 'package:school_surveys/domain/enums/survey_status.dart';
 import 'package:school_surveys/domain/repository/survey_repository.dart';
 
@@ -32,8 +33,8 @@ class AddSurveyCubit extends Cubit<AddSurveyState> {
     required String description,
     required DateTime startDate,
     required DateTime dueDate,
-    required String assignedTo,
-    required String assignedBy,
+    required User assignedTo,
+    required User assignedBy,
     required String createdBy,
   }) async {
     emit(AddSurveyLoading());

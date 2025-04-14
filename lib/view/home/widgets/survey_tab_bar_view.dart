@@ -6,6 +6,7 @@ import 'package:school_surveys/domain/entities/survey.dart';
 import 'package:school_surveys/domain/enums/survey_status.dart';
 import 'package:school_surveys/view/home/cubit/survey_tab_cubit.dart';
 import 'package:school_surveys/view/home/widgets/survey_list_tile.dart';
+import 'package:school_surveys/view/widgets/empty_state.dart';
 
 class SurveyTabBarView extends StatelessWidget {
   const SurveyTabBarView({super.key, required this.status});
@@ -21,7 +22,7 @@ class SurveyTabBarView extends StatelessWidget {
           case SurveyTabLoading():
             return const Center(child: CircularProgressIndicator());
           case SurveyTabEmpty():
-            return const Center(child: Text("No surveys found."));
+            return EmptyState(message: "No surveys to be displayed");
           case SurveyTabError():
             return Center(child: Text(state.message));
           case SurveyTabLoaded():

@@ -23,7 +23,7 @@ class SchoolDataCubit extends Cubit<SchoolDataState> {
       case Ok<List<SchoolData>>():
         emit(SchoolDataLoaded(existingSchoolDataResult.value));
       case Error<List<SchoolData>>():
-      // TODO: Handle this case.
+        emit(SchoolDataLoaded([]));
     }
   }
 

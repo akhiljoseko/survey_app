@@ -15,3 +15,11 @@ class GeneralDataLoaded extends GeneralDataState {
   @override
   List<Object> get props => [data];
 }
+
+final class GeneralDataSaveFailure extends GeneralDataState {
+  final String errorMessage;
+
+  const GeneralDataSaveFailure(this.errorMessage);
+  @override
+  List<Object> get props => [errorMessage];
+}

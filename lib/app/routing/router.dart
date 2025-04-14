@@ -6,6 +6,7 @@ import 'package:school_surveys/view/authentication/auth_cubit.dart';
 import 'package:school_surveys/view/edit_survey/edit_survey_screen.dart';
 import 'package:school_surveys/view/forgot_password/forgot_password_screen.dart';
 import 'package:school_surveys/view/sign_up/sign_up_screen.dart';
+import 'package:school_surveys/view/splash/splash_screen.dart';
 import 'package:school_surveys/view/survey_commencement/survey_commencement_screen.dart';
 import 'package:school_surveys/view/survey_meta_view/suvey_meta_view_screen.dart';
 
@@ -18,8 +19,7 @@ final GoRouter router = GoRouter(
     final authStatus = context.read<AuthCubit>().state.status;
     final loggingIn = state.matchedLocation.startsWith('/login');
 
-    //Add Splash here
-    if (authStatus == AuthStatus.unknown) return '/login';
+    if (authStatus == AuthStatus.unknown) return '/login/splash';
 
     if (authStatus == AuthStatus.unauthenticated && !loggingIn) {
       return '/login';
@@ -37,6 +37,11 @@ final GoRouter router = GoRouter(
       name: AppRoutes.login,
       builder: (_, _) => LoginScreen(),
       routes: [
+        GoRoute(
+          path: 'splash',
+          name: AppRoutes.splash,
+          builder: (_, __) => const SplashScreen(),
+        ),
         GoRoute(
           path: 'signup',
           name: AppRoutes.signup,

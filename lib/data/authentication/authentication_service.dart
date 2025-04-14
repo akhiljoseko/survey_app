@@ -18,6 +18,7 @@ class AuthenticationService {
 
   final _authStateStreamController = StreamController<User?>.broadcast();
   Stream<User?> get authStateChanges async* {
+    await Future.delayed(_delayDuration);
     yield await _getAuthenticatedUserIfAny();
     yield* _authStateStreamController.stream;
   }

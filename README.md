@@ -122,11 +122,6 @@ assets/
 - **Equatable** for efficient state comparison
 - **Repository Pattern** for data access abstraction
 
-Example:  
-```dart
-class AddSurveyCubit extends Cubit<AddSurveyState> { ... }
-```
-
 ---
 
 ## 📌 Important Notes

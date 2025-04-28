@@ -77,7 +77,7 @@ assets/
 
 1. **Clone the repository**
    ```bash
-   git clone [<repository_url>](https://github.com/akhiljoseko/survey_app.git)
+   git clone https://github.com/akhiljoseko/survey_app.git
    cd survey_app
    ```
 
